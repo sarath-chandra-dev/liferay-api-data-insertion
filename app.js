@@ -2,7 +2,7 @@ $(document).ready(function () {
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "jsfile.csv",
+            url: "http://127.0.0.1:5500/jsfile.csv",
             dataType: "text",
             success: function (data) { processData(data); }
         });
@@ -20,10 +20,10 @@ function processData(allText) {
 
             var tarr = {};
             for (var j = 0; j < headers.length; j++) {
-                // tarr.push("'" + headers[j] + ":" + data[j]);
                 tarr = addToObject(tarr, headers[j], data[j]);
             }
             console.log(tarr);
+            Liferay.Service('/foo.foo/dosomething',tarr,function (obj) {console.log(obj)});
             lines.push(tarr);
         }
     }
@@ -52,5 +52,3 @@ var addToObject = function (obj, key, value, index) {
     }
     return temp;
 };
-
-//Liferay.Service('/foo.foo/dosomething',ssss,function (obj) {console.log(obj)});
